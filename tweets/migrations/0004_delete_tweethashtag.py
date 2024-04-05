@@ -4,13 +4,12 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tweets', '0003_remove_tweetauthor_description'),
+        ("tweets", "0003_remove_tweetauthor_description"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='TweetHashtag',
+            name="TweetHashtag",
         ),
     ]
