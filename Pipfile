@@ -9,11 +9,8 @@ djangorestframework = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 whitenoise = "*"
-djangorestframework-simplejwt = "*"
 drf-yasg = "*"
 gunicorn = "*"
-pandas = "*"
-sqlalchemy = "*"
 textblob = "*"
 
 [dev-packages]
