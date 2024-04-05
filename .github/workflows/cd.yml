@@ -1,0 +1,58 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    name: Python==${{ matrix.python-version }} | ${{ matrix.django-version }}
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.10"
+        django-version:
+          - django~=5.0.0
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Create .env file
+      run: |
+        touch .env
+
+    - name: Copy .env variable to .env file
+      run: |
+        echo "${{ secrets.ENV_VARIABLES }}" >> .env
+
+    - name: Zip project
+      run: |
+        zip -r project.zip .
+
+    - name: Convert pem file
+      run: |
+        echo "${{ secrets.VM_KEY }}" > vm_key
+        chmod 600 vm_key
+
+    - name: Upload artifact to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no -i vm_key project.zip ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/tmp
+
+    - name: SSH and unzip
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} "unzip -o /tmp/project.zip -d /home/shubhank/project"
+    
+    - name: Run docker compose
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} 'cd /home/shubhank/project && docker compose up --scale web=2 --no-deps --no-recreate -d && sleep 10 && docker compose up --scale web=1 --no-deps -d'
