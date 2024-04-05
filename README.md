@@ -1,6 +1,13 @@
 # frome-assignment
 
-## Introduction
+## Deployment/Running the backend
+
+1. Clone the repository
+2. Run `docker compose build` and `docker compose up -d`to start the backend server
+3. The server will be running on `http://localhost`
+4. Swagger documentation can be accessed at `http://localhost/swagger`
+
+## Requirements of the task
 
 You are tasked with building a comprehensive RESTful API for a social media analytics platform. This API should provide various endpoints to analyze and retrieve data from any social media platform, with Twitter being the ideal focus. The API should allow users to retrieve insights, trends, and statistics about hashtags or any keywords.
 
@@ -32,6 +39,24 @@ You are tasked with building a comprehensive RESTful API for a social media anal
      }
      ```
    - Note: This is just an example; analysis can be extended to various metrics such as sentiment analysis.
+
+3. **List of all the hashtags**
+   - Description: Endpoint to retrieve a list of all hashtags.
+   - Example Output:
+     ```json
+     {
+        "results": [
+         {
+            "id": 1,
+            "hashtag": "..."
+         },
+         {
+            "id": 2,
+            "hashtag": "..."
+         }
+        ]
+     }
+     ```
 
 ## Data Storage
 
