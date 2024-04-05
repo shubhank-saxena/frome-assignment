@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tweets', '0001_initial'),
+        ("tweets", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='tweet',
-            name='id',
+            model_name="tweet",
+            name="id",
             field=models.BigIntegerField(primary_key=True, serialize=False),
         ),
         migrations.AlterField(
-            model_name='tweetauthor',
-            name='id',
+            model_name="tweetauthor",
+            name="id",
             field=models.BigIntegerField(primary_key=True, serialize=False),
         ),
     ]

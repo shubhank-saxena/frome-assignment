@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tweets', '0010_remove_tweet_hashtags'),
+        ("tweets", "0010_remove_tweet_hashtags"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='tweet',
-            name='hashtags',
-            field=models.ManyToManyField(to='tweets.tweethashtag'),
+            model_name="tweet",
+            name="hashtags",
+            field=models.ManyToManyField(to="tweets.tweethashtag"),
         ),
     ]

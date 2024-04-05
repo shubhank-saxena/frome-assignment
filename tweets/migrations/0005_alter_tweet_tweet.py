@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tweets', '0004_delete_tweethashtag'),
+        ("tweets", "0004_delete_tweethashtag"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='tweet',
-            name='tweet',
+            model_name="tweet",
+            name="tweet",
             field=models.TextField(),
         ),
     ]
